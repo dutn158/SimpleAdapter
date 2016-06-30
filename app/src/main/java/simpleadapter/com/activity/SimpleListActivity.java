@@ -1,4 +1,4 @@
-package simpleadapter.com.simpleadapter;
+package simpleadapter.com.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +22,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import simpleadapter.com.R;
+import simpleadapter.com.model.EmployeeModel;
+import simpleadapter.com.simpleadapter.EmployeeAdapter;
 
 public class SimpleListActivity extends AppCompatActivity {
 
@@ -41,11 +44,13 @@ public class SimpleListActivity extends AppCompatActivity {
 
         mAdapter = new EmployeeAdapter(getApplicationContext());
         mSimpleRecyclerView.setAdapter(mAdapter);
+
         // Json parse
         // converting back to object
         try {
             InputStream is = getAssets().open("simple_list_data.json");
-            Type listType = new TypeToken<ArrayList<EmployeeModel>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<EmployeeModel>>() {
+            }.getType();
             StringWriter writer = new StringWriter();
             IOUtils.copy(is, writer, "UTF-8");
             String jsonArrayStr = writer.toString();

@@ -1,12 +1,10 @@
-package simpleadapter.com.simpleadapter;
+package simpleadapter.com.viewholder;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import simpleadapter.com.model.EmployeeModel;
+import simpleadapter.com.R;
 
 /**
  * Created by chuchuynh on 6/25/16.

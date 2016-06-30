@@ -2,6 +2,7 @@ package simpleadapter.com.simpleadapter;
 
 import android.content.Context;
 import android.os.Looper;
+import android.support.v7.appcompat.BuildConfig;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -14,6 +15,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import simpleadapter.com.viewholder.BaseSimpleViewHolder;
 
 /**
  * Created by chuchuynh on 6/24/16.

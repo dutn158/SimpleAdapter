@@ -1,4 +1,4 @@
-package simpleadapter.com.simpleadapter;
+package simpleadapter.com.viewholder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

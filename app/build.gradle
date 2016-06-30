@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "simpleadapter.com.simpleadapter"
+        applicationId "simpleadapter.com"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
