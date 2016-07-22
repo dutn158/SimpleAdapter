@@ -1,89 +1,53 @@
 package simpleadapter.com.login;
 
-import android.text.TextUtils;
+import com.fernandocejas.frodo.annotation.RxLogSubscriber;
 
 import javax.inject.Inject;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-import simpleadapter.com.dagger.Injector;
+import simpleadapter.com.base.interactor.DefaultSubscriber;
+import simpleadapter.com.base.interactor.UseCase;
+import simpleadapter.com.base.scope.PerActivity;
 
 /**
- * Created by chuchuynh on 7/14/16.
+ * Created by huyletran84@gmail.com on 7/14/16.
  */
+@PerActivity
 public class LoginPresenterImpl implements LoginPresenter {
 
-    private final CompositeSubscription mSubscription = new CompositeSubscription();
-
-    protected CompositeSubscription getSubscription() {
-        return mSubscription;
-    }
-
-    protected void clearSubscription() {
-        mSubscription.clear();
-    }
-
+    private UseCase mLoginCase;
     private LoginView mView;
     private LoginRouter mRouter;
 
     @Inject
-    Repository mRepository;
-
-    public LoginPresenterImpl(LoginView view, LoginRouter router) {
-        mView = view;
-        mRouter = router;
-        Injector.INSTANCE.inject(this);
+    public LoginPresenterImpl(UseCase loginCase) {
+        this.mLoginCase = loginCase;
     }
+
+    @Override
+    public void setViewAndRouter(LoginView loginView, LoginRouter router) {
+        mView = loginView;
+        mRouter = router;
+    }
+
     @Override
     public void onLoginButtonClick(String userName, String passWord) {
-        if (!isInputAll(userName, passWord)) {
-            mView.showErrorMessage("Please input all data!");
-            return;
+        mLoginCase.execute(new LoginSubscriber());
+    }
+
+    @RxLogSubscriber
+    private final class LoginSubscriber extends DefaultSubscriber<LoginModel> {
+
+        @Override public void onCompleted() {
+            LoginPresenterImpl.this.mView.dismissLoadingView();
         }
 
-        if (!isNetworkOK()) {
-            return;
+        @Override public void onError(Throwable e) {
+            LoginPresenterImpl.this.mView.dismissLoadingView();
+            LoginPresenterImpl.this.mView.showErrorMessage("There is error when logging in.");
         }
 
-        // Login
-        getSubscription()
-                .add(mRepository.login(userName, passWord)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<LoginModel>() {
-                    @Override
-                    public void call(LoginModel loginModel) {
-                        mView.dismissProgressDialog();
-                        if (loginModel.errorcode == 0) {
-                            mRouter.openMainScreen();
-                            // Some other logic such as: save username and password to Section... TODO
-                        } else {
-                            mView.showErrorMessage("Login failure!");
-                        }
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        // Error here
-                        mView.dismissProgressDialog();
-                        mView.showErrorMessage("Login failure!");
-                    }
-                }));
-    }
-
-    @Override
-    public boolean isInputAll(String userName, String passWord) {
-        return !TextUtils.isEmpty(userName) && !TextUtils.isEmpty(passWord);
-    }
-
-    @Override
-    public boolean isNetworkOK() {
-        // TODO: in fact you must implement it to check the network state
-        return true;
-    }
-
-    @Override
-    public boolean hasErrorInResponse() {
-        return false;
+        @Override public void onNext(LoginModel loginModel) {
+            LoginPresenterImpl.this.mRouter.openMainScreen();
+        }
     }
 }

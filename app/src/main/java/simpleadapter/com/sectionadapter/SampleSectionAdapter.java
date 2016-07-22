@@ -14,9 +14,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import simpleadapter.com.section.EmployeeSection;
-import simpleadapter.com.section.LoadingSection;
-import simpleadapter.com.section.SampleTitleSection;
+import simpleadapter.com.base.adapter.BaseSectionAdapter;
+import simpleadapter.com.sectionadapter.section.EmployeeSection;
+import simpleadapter.com.sectionadapter.section.LoadingSection;
+import simpleadapter.com.sectionadapter.section.SampleTitleSection;
 import simpleadapter.com.model.EmployeeModel;
 
 /**

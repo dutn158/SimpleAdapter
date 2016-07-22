@@ -5,15 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import simpleadapter.com.sectionadapter.SampleSectionAdapter;
 import simpleadapter.com.R;
 
 public class SectionListActivity extends AppCompatActivity {
 
-    @InjectView(R.id.simple_list_recycler_view)
-    RecyclerView mSimpleRecyclerView;
+    @BindView(R.id.simple_list_recycler_view) RecyclerView mSimpleRecyclerView;
 
     private SampleSectionAdapter mAdapter;
 
@@ -21,7 +20,7 @@ public class SectionListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_list);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mSimpleRecyclerView.setLayoutManager(layoutManager);

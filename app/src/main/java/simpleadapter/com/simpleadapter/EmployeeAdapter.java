@@ -3,8 +3,9 @@ package simpleadapter.com.simpleadapter;
 import android.content.Context;
 import android.view.View;
 import simpleadapter.com.R;
+import simpleadapter.com.base.adapter.BaseSimpleAdapter;
 import simpleadapter.com.model.EmployeeModel;
-import simpleadapter.com.viewholder.EmployeeViewHolder;
+import simpleadapter.com.simpleadapter.viewholder.EmployeeViewHolder;
 
 /**
  * Created by chuchuynh on 6/29/16.

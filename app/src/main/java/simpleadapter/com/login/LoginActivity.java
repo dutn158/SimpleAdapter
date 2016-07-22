@@ -2,24 +2,27 @@ package simpleadapter.com.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.InjectViews;
 import butterknife.OnClick;
 import simpleadapter.com.R;
 import simpleadapter.com.activity.MainActivity;
+import simpleadapter.com.base.activity.BaseActivity;
+import simpleadapter.com.login.LoginComponent;
+import simpleadapter.com.login.DaggerLoginComponent;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
-    @InjectView(R.id.username_edt)
-    EditText userName;
-    @InjectView(R.id.password_edt)
-    EditText password;
-    private LoginPresenter mPresenter;
+    @BindView(R.id.username_edt) EditText userName;
+    @BindView(R.id.password_edt) EditText password;
+    @Inject LoginPresenterImpl mPresenter;
+
+    private LoginComponent mComponent;
 
     private LoginView mView = new LoginView() {
         @Override
@@ -33,13 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        public void showProgressDialog() {
-            // TODO
+        public void showLoadingView() {
+
         }
 
         @Override
-        public void dismissProgressDialog() {
-            // TODO
+        public void dismissLoadingView() {
+
         }
     };
 
@@ -51,13 +54,21 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
+
+//    @Override
+//    protected <C> C getComponent(Class<C> componentType) {
+//        return super.getComponent(componentType);
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         // Init presenter with View and Router.
-        mPresenter = new LoginPresenterImpl(mView, mRouter);
+        mComponent.inject(this);
+
+        mPresenter.setViewAndRouter(mView, mRouter);
     }
 
     @OnClick(R.id.login_btn)
@@ -65,5 +76,13 @@ public class LoginActivity extends AppCompatActivity {
         // Login
         mPresenter.onLoginButtonClick(userName.getText().toString(),
                 password.getText().toString());
+    }
+
+    @Override
+    protected void initializeInjector() {
+        super.initializeInjector();
+        mComponent = DaggerLoginComponent.builder()
+                .loginModule(new LoginModule())
+                .build();
     }
 }

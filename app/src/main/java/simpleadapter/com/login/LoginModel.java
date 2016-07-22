@@ -1,7 +1,7 @@
 package simpleadapter.com.login;
 
 /**
- * Created by chuchuynh on 7/14/16.
+ * Created by huyletran84@gmail.com on 7/14/16.
  */
 public class LoginModel {
     public String username;

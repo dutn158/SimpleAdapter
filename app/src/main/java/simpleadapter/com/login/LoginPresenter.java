@@ -1,11 +1,12 @@
 package simpleadapter.com.login;
 
+import simpleadapter.com.base.presenter.Presenter;
+import simpleadapter.com.base.scope.PerActivity;
+
 /**
- * Created by chuchuynh on 7/14/16.
+ * Created by huyletran84@gmail.com on 7/14/16.
  */
-public interface LoginPresenter {
+@PerActivity
+public interface LoginPresenter extends Presenter<LoginView, LoginRouter> {
     void onLoginButtonClick(String userName, String password);
-    boolean isInputAll(String userName, String passWord);
-    boolean isNetworkOK();
-    boolean hasErrorInResponse();
 }

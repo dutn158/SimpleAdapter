@@ -19,8 +19,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import simpleadapter.com.R;
 import simpleadapter.com.model.EmployeeModel;
@@ -28,8 +28,7 @@ import simpleadapter.com.simpleadapter.EmployeeAdapter;
 
 public class SimpleListActivity extends AppCompatActivity {
 
-    @InjectView(R.id.simple_list_recycler_view)
-    RecyclerView mSimpleRecyclerView;
+    @BindView(R.id.simple_list_recycler_view) RecyclerView mSimpleRecyclerView;
 
     private EmployeeAdapter mAdapter;
 
@@ -37,7 +36,7 @@ public class SimpleListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_list);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mSimpleRecyclerView.setLayoutManager(layoutManager);
