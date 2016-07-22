@@ -22,6 +22,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import simpleadapter.com.base.module.ApplicationModule;
 import simpleadapter.com.base.activity.BaseActivity;
+import simpleadapter.com.login.LoginApiRequester;
 import simpleadapter.com.base.thread.PostExecutionThread;
 import simpleadapter.com.base.thread.ThreadExecutor;
 
@@ -31,6 +32,7 @@ import simpleadapter.com.base.thread.ThreadExecutor;
 @Singleton // Constraints this component to one-per-application or unscoped bindings.
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
+  void inject(BaseActivity baseActivity);
   //Exposed to sub-graphs.
   Context context();
   ThreadExecutor threadExecutor();

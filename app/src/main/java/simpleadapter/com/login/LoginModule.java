@@ -32,11 +32,15 @@ public class LoginModule {
 
   @Provides @PerActivity UseCase provideLoginUseCase(LoginRepository userRepository,
                                                      ThreadExecutor threadExecutor,
-      PostExecutionThread postExecutionThread) {
+                                                     PostExecutionThread postExecutionThread) {
     return new LoginCase(userRepository, threadExecutor, postExecutionThread);
   }
 
-  @Provides @PerActivity LoginRepository provideLoginRepository() {
-    return new LoginRepositoryImpl();
+  @Provides @PerActivity LoginApiRequester provideLoginApiRequester() {
+    return new LoginApiRequesterImpl();
+  }
+
+  @Provides @PerActivity LoginRepository provideLoginRepository(LoginApiRequester apiRequester) {
+    return new LoginRepositoryImpl(apiRequester);
   }
 }

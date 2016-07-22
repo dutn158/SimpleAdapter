@@ -15,7 +15,6 @@ public class LoginCase extends UseCase {
     private String mUserName;
     private String mPassword;
 
-    @Inject
     protected LoginCase(LoginRepository loginRepository,
                         ThreadExecutor threadExecutor,
                         PostExecutionThread postExecutionThread) {

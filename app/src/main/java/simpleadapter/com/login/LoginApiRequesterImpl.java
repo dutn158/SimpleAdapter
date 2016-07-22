@@ -1,15 +1,17 @@
-package simpleadapter.com.base.net;
+package simpleadapter.com.login;
+
+import javax.inject.Inject;
 
 import rx.Observable;
-import simpleadapter.com.login.LoginDto;
+import simpleadapter.com.base.scope.PerActivity;
 
 /**
  * Created by huyletran84@gmail.com on 7/15/16.
  */
-public class ApiRequesterImpl implements ApiRequester {
+@PerActivity
+public class LoginApiRequesterImpl implements LoginApiRequester {
 
-    public ApiRequesterImpl() {
-    }
+    public LoginApiRequesterImpl() {}
 
     @Override
     public Observable<LoginDto> login(String username, String password) {

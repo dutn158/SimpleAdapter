@@ -8,8 +8,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import simpleadapter.com.AndroidApplication;
-import simpleadapter.com.base.net.ApiRequester;
-import simpleadapter.com.base.net.ApiRequesterImpl;
 import simpleadapter.com.base.thread.PostExecutionThread;
 import simpleadapter.com.base.thread.ThreadExecutor;
 import simpleadapter.com.base.thread.UIThread;
@@ -36,18 +34,5 @@ public class ApplicationModule {
     @Provides @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
-    }
-
-    @Provides
-    @Singleton
-    ApiRequester provideApiRequester() {
-        return new ApiRequesterImpl();
-    }
-
-    @Provides
-    @Singleton
-    SharedPreferences provideSharePreference() {
-        // TODO
-        return null;
     }
 }

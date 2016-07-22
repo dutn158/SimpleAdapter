@@ -26,5 +26,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void initializeInjector() {
         // Implement at sub class if needed
+
     }
 }

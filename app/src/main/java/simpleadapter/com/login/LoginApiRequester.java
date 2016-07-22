@@ -1,13 +1,10 @@
-package simpleadapter.com.base.net;
-
-import android.util.Log;
+package simpleadapter.com.login;
 
 import rx.Observable;
-import simpleadapter.com.login.LoginDto;
 
 /**
  * Created by huyletran84@gmail.com on 7/15/16.
  */
-public interface ApiRequester {
+public interface LoginApiRequester {
     Observable<LoginDto> login(String username, String password);
 }

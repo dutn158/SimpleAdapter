@@ -16,6 +16,7 @@
 package simpleadapter.com.login;
 
 import dagger.Component;
+import dagger.Provides;
 import simpleadapter.com.base.component.ActivityComponent;
 import simpleadapter.com.base.component.ApplicationComponent;
 import simpleadapter.com.base.scope.PerActivity;

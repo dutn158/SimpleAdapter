@@ -1,11 +1,9 @@
 package simpleadapter.com.login;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.functions.Func1;
-import simpleadapter.com.base.net.ApiRequester;
 import simpleadapter.com.base.scope.PerActivity;
 
 /**
@@ -14,10 +12,10 @@ import simpleadapter.com.base.scope.PerActivity;
 @PerActivity
 public class LoginRepositoryImpl implements LoginRepository {
 
-    @Inject
-    ApiRequester mApiRequester;
+    LoginApiRequester mApiRequester;
 
-    public LoginRepositoryImpl() {
+    public LoginRepositoryImpl(LoginApiRequester requester) {
+        this.mApiRequester = requester;
     }
 
     @Override

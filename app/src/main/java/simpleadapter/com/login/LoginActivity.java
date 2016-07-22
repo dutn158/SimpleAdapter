@@ -10,16 +10,16 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import simpleadapter.com.AndroidApplication;
 import simpleadapter.com.R;
 import simpleadapter.com.activity.MainActivity;
 import simpleadapter.com.base.activity.BaseActivity;
-import simpleadapter.com.login.LoginComponent;
-import simpleadapter.com.login.DaggerLoginComponent;
 
 public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.username_edt) EditText userName;
     @BindView(R.id.password_edt) EditText password;
+
     @Inject LoginPresenterImpl mPresenter;
 
     private LoginComponent mComponent;
@@ -54,12 +54,6 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
-
-//    @Override
-//    protected <C> C getComponent(Class<C> componentType) {
-//        return super.getComponent(componentType);
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +61,6 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         // Init presenter with View and Router.
         mComponent.inject(this);
-
         mPresenter.setViewAndRouter(mView, mRouter);
     }
 
@@ -82,6 +75,7 @@ public class LoginActivity extends BaseActivity {
     protected void initializeInjector() {
         super.initializeInjector();
         mComponent = DaggerLoginComponent.builder()
+                .applicationComponent(((AndroidApplication)getApplication()).getApplicationComponent())
                 .loginModule(new LoginModule())
                 .build();
     }
